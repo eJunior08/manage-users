@@ -16,16 +16,10 @@
     "typeRoots": ["node_modules/@types", "./src/types"],
     "paths": {
       "@shared/*": ["./src/shared/*"],
+      "@router/*": ["./src/router/*"],
       "@domain/*": ["./src/domain/*"],
-      "@theme/*": ["./src/theme/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@reducer/*": ["./src/reducer/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@services/*": ["./src/services/*"],
       "@models/*": ["./src/models/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@test/*": ["./src/test/*"],
+      "@theme/*": ["./src/theme/*"],
     }
   },
   "exclude": [
