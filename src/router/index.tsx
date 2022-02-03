@@ -6,6 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ListUsers} from '@domain/list-users';
 import {Detail} from '@domain/list-users/detail';
 import {Create} from '@domain/list-users/create';
+import {TakePhoto} from '@domain/list-users/create/take-photo';
 
 const {Navigator, Screen} = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ export function Routes() {
         <Screen name="ListUsers" component={ListUsers} />
         <Screen name="UserDetail" component={Detail} />
         <Screen name="UserCreate" component={Create} />
+        <Screen name="TakePhoto" component={TakePhoto} />
       </Navigator>
     </NavigationContainer>
   );
