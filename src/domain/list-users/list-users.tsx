@@ -39,6 +39,11 @@ export function ListUsers() {
     return <S.UserCard onPress={() => navigation.navigate(route)} />;
   };
 
+  function onPressFAB() {
+    const route = 'UserCreate' as never;
+    navigation.navigate(route);
+  }
+
   return (
     <S.Wrapper>
       <FlatList
@@ -47,6 +52,8 @@ export function ListUsers() {
         renderItem={renderItem}
         ListEmptyComponent={<EmptyList />}
       />
+
+      <S.FabButton onPress={onPressFAB} />
     </S.Wrapper>
   );
 }
