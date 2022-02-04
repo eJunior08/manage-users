@@ -33,8 +33,14 @@ export function Create({route}: Prop) {
   } = create;
 
   function onHandleSave() {
-    if (!loading) {
+    if (!loading.saving && !loading.delete) {
       functions.onSave();
+    }
+  }
+
+  function onHandleDelete() {
+    if (!loading.saving && !loading.delete) {
+      functions.onRemove();
     }
   }
 
@@ -58,16 +64,18 @@ export function Create({route}: Prop) {
 
       <S.ButtonContainer>
         <S.Button disabled={disableCreate} onPress={onHandleSave}>
-          {!loading && (
+          {!loading.saving && (
             <S.ButtonText>{isUpdating ? 'Editar' : 'Criar'}</S.ButtonText>
           )}
 
-          {loading && <S.Indicator />}
+          {loading.saving && <S.Indicator />}
         </S.Button>
 
         {isUpdating && (
-          <S.DeleteButton onPress={functions.onRemove}>
-            <S.ButtonText>Excluir</S.ButtonText>
+          <S.DeleteButton onPress={onHandleDelete}>
+            {!loading.delete && <S.ButtonText>Excluir</S.ButtonText>}
+
+            {loading.delete && <S.Indicator />}
           </S.DeleteButton>
         )}
       </S.ButtonContainer>

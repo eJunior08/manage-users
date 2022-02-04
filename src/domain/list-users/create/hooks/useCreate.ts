@@ -21,7 +21,10 @@ export function useCreate(user: User) {
 
   const isUpdating = !_isUndefined(user);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState({
+    saving: false,
+    delete: false,
+  });
   const [date, setDate] = useState(new Date());
   const imageUri = _isEmpty(profileUri) ? user?.imageUri ?? '' : profileUri;
   const [payload, setPayload] = useState<Omit<User, 'id' | 'imageUri'>>({
@@ -66,7 +69,7 @@ export function useCreate(user: User) {
   }
 
   async function createUser() {
-    setLoading(true);
+    setLoading(prev => ({...prev, saving: true}));
 
     const newReference = database().ref('/users').push();
 
@@ -82,7 +85,7 @@ export function useCreate(user: User) {
     const pathToFile = profileUri;
     await reference.putFile(pathToFile as string);
 
-    setLoading(false);
+    setLoading(prev => ({...prev, saving: false}));
   }
 
   async function onSave() {
@@ -103,6 +106,8 @@ export function useCreate(user: User) {
 
   async function onRemove() {
     try {
+      setLoading(prev => ({...prev, delete: true}));
+
       await database().ref(`/users/${user.id}`).remove();
 
       const reference = storage().ref(user.id);
@@ -110,6 +115,7 @@ export function useCreate(user: User) {
 
       setProfileUri('');
       navigation.goBack();
+      setLoading(prev => ({...prev, delete: false}));
     } catch (error) {
       const message = 'Erro ao tentar excluir usuário.';
       console.error(message, error);
