@@ -44,4 +44,8 @@ export const FabButton = styled.Pressable.attrs({
   justify-content: center;
 `;
 
-export const Teste = styled(Icon)``;
+export const AddIcon = styled(Icon).attrs({
+  name: 'add',
+  size: 30,
+  color: '#fff',
+})``;

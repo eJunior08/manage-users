@@ -13,12 +13,12 @@ export const Wrapper = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: ${({theme}) => theme.color.gray9};
+  color: ${({theme}) => theme.color.primary};
   font-family: 'Poppins-Regular';
 `;
 
 export const StyledIcon = styled(Icon).attrs({
   name: 'list',
-  color: color.gray8,
+  color: color.primary,
   size: 75,
 })``;

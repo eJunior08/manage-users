@@ -66,8 +66,6 @@ export function ListUsers() {
     }
   }, [isFocused]);
 
-  console.log({items});
-
   return (
     <S.Wrapper>
       <FlatList
@@ -79,7 +77,7 @@ export function ListUsers() {
       />
 
       <S.FabButton onPress={onPressFAB}>
-        <S.Teste name="add" size={30} color="#fff" />
+        <S.AddIcon />
       </S.FabButton>
     </S.Wrapper>
   );
