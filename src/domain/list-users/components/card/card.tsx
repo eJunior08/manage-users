@@ -1,16 +1,22 @@
 import React from 'react';
+import {User} from '@models/user';
 
 import * as S from './styles';
 
-export function Card({...props}) {
+type Props = {
+  user: User;
+  onPress: () => void;
+};
+
+export function Card({user, ...props}: Props) {
   return (
     <S.Wrapper {...props}>
       <S.ProfileImage />
 
       <S.Content>
-        <S.Title>Nome: Elson Freitas Oliveira Junior</S.Title>
-        <S.Title>Codigo: #00001</S.Title>
-        <S.Title>Aniversário: 08/06/1997</S.Title>
+        <S.Title>Nome: {user.name}</S.Title>
+        <S.Title>Codigo: #{user.code}</S.Title>
+        <S.Title>Aniversário: {user.birthdate}</S.Title>
       </S.Content>
     </S.Wrapper>
   );

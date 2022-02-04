@@ -1,7 +1,8 @@
+import {color} from '@theme/color';
 import styled from 'styled-components/native';
 
 export const Wrapper = styled.Pressable.attrs({
-  shadowColor: '#00000033',
+  shadowColor: color.primary,
   shadowOffset: {
     width: 0,
     height: 2,
@@ -11,13 +12,15 @@ export const Wrapper = styled.Pressable.attrs({
 
   elevation: 5,
 })`
-  width: 100%;
+  /* width: 100%; */
   height: 90px;
 
-  background-color: ${({theme}) => theme.color.light};
+  background-color: #e9ecef;
   border-radius: 6px;
 
   flex-direction: row;
+
+  margin: 0 16px;
 `;
 
 export const ProfileImage = styled.Image.attrs({
