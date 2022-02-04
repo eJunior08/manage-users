@@ -84,6 +84,7 @@ export function useTakePhoto() {
     imageUri,
     icons,
     functions: {
+      setImageUri,
       onPressSwitchCamera,
       onPressSwitchFlashMode,
       takePhoto,

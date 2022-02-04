@@ -41,6 +41,7 @@ export function TakePhoto() {
 
       {!_isEmpty(imageUri) && (
         <ShowImage
+          setImageUri={functions.setImageUri}
           imageUri={imageUri}
           onConfirmImage={functions.onConfirmImage}
         />
