@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {Text} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -60,6 +61,7 @@ export const InputContainer = styled.View`
   /* flex: 1; */
   height: 200px;
   justify-content: space-between;
+  margin: 0 16px;
 `;
 
 export const Input = styled.TextInput.attrs({
@@ -74,4 +76,10 @@ export const Button = styled.Pressable`
   height: 50px;
 
   background-color: ${({theme}) => theme.color.primary};
+`;
+
+export const Title = styled(Text)`
+  color: ${({theme}) => theme.color.gray9};
+  font-family: 'Poppins-Regular';
+  font-size: 20px;
 `;
