@@ -24,6 +24,7 @@ export function FormInput({payload, onChangeText, onOpenDatePicker}: Props) {
         placeholder="Insira o código"
         value={payload.code}
         onChangeText={text => onChangeText(text, 'code')}
+        keyboardType="decimal-pad"
       />
       <S.Input
         placeholder="Insira o nome"
