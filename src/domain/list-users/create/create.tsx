@@ -1,10 +1,11 @@
 import React from 'react';
-import {Button} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
-import DatePicker from 'react-native-date-picker';
-import RBSheet from 'react-native-raw-bottom-sheet';
 
 import _isEmpty from 'lodash/isEmpty';
+
+/* Components */
+import {FormInput} from '@domain/list-users/create/components/form-input';
+import {DatePicker} from '@domain/list-users/create/components/date-picker';
 
 /* Hooks */
 import {useCreate} from '@domain/list-users/create/hooks/useCreate';
@@ -13,7 +14,6 @@ import {useCreate} from '@domain/list-users/create/hooks/useCreate';
 import {ParamList} from '@domain/list-users/create/types/param-list';
 
 import * as S from './styles';
-import {FormInput} from './components/form-input';
 
 type Prop = {
   route: RouteProp<ParamList, 'Detail'>;
@@ -35,34 +35,20 @@ export function Create({route}: Prop) {
         </S.CameraContainer>
       </S.ProfileContainer>
 
-      <FormInput payload={payload} onChangeText={functions.onChangeText} />
+      <FormInput
+        payload={payload}
+        onChangeText={functions.onChangeText}
+        onOpenDatePicker={() => functions.actionDatePicker('open')}
+      />
 
       <S.Button onPress={functions.onSave} />
 
-      <Button
-        title="OPEN BOTTOM SHEET"
-        onPress={() => functions.actionDatePicker('open')}
+      <DatePicker
+        refRBSheet={refRBSheet}
+        date={date}
+        onCloseDatePicker={() => functions.actionDatePicker('close')}
+        setDate={functions.setDate}
       />
-
-      <RBSheet
-        ref={ref => (refRBSheet.current = ref)}
-        height={350}
-        openDuration={250}
-        animationType="slide"
-        customStyles={{
-          wrapper: {},
-          container: {
-            borderTopLeftRadius: 32,
-            borderTopRightRadius: 32,
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            paddingVertical: 10,
-          },
-        }}>
-        <S.Title>Selecione uma data</S.Title>
-        <DatePicker date={date} onDateChange={functions.setDate} mode="date" />
-        <S.Button onPress={() => functions.actionDatePicker('close')} />
-      </RBSheet>
     </S.Wrapper>
   );
 }
