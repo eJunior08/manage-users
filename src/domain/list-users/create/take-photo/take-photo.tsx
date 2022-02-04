@@ -5,10 +5,11 @@ import _isEmpty from 'lodash/isEmpty';
 
 import * as S from './styles';
 import {StatusBar} from 'react-native';
+import {ShowImage} from './components/show-image';
 
 export function TakePhoto() {
   const takePhoto = useTakePhoto();
-  const {imageUri, cameraRef, cameraOptions, functions} = takePhoto;
+  const {imageUri, cameraRef, cameraOptions, icons, functions} = takePhoto;
 
   return (
     <S.Wrapper>
@@ -27,15 +28,22 @@ export function TakePhoto() {
             cameraOptions.androidCameraPermission
           }>
           <S.ButtonsContainer>
-            <S.AuxButton onPress={functions.onPressSwitchFlashMode} />
+            <S.AuxButton onPress={functions.onPressSwitchFlashMode}>
+              <S.StyledIcon name={icons.flash} color="#FFF" size={20} />
+            </S.AuxButton>
             <S.MainButton onPress={functions.takePhoto} />
-            <S.AuxButton onPress={functions.onPressSwitchCamera} />
+            <S.AuxButton onPress={functions.onPressSwitchCamera}>
+              <S.StyledIcon name={icons.switch} color="#FFF" size={20} />
+            </S.AuxButton>
           </S.ButtonsContainer>
         </S.Camera>
       )}
 
       {!_isEmpty(imageUri) && (
-        <S.Image source={{uri: imageUri}} resizeMode="cover" />
+        <ShowImage
+          imageUri={imageUri}
+          onConfirmImage={functions.onConfirmImage}
+        />
       )}
     </S.Wrapper>
   );

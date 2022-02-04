@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import {RNCamera} from 'react-native-camera';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const Wrapper = styled.View`
   flex: 1;
@@ -9,10 +10,6 @@ export const Camera = styled(RNCamera)`
   flex: 1;
   justify-content: flex-end;
   align-items: center;
-`;
-
-export const Image = styled.Image`
-  flex: 1;
 `;
 
 export const ButtonsContainer = styled.View`
@@ -29,14 +26,21 @@ export const MainButton = styled.Pressable`
 
   margin: 0px 80px;
 
-  background-color: red;
+  border-color: ${({theme}) => theme.color.gray9};
+
+  border-width: 5px;
 `;
 
 export const AuxButton = styled.Pressable`
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
 
   border-radius: 20px;
 
-  background-color: red;
+  background-color: ${({theme}) => theme.color.gray9};
+
+  align-items: center;
+  justify-content: center;
 `;
+
+export const StyledIcon = styled(Icon)``;

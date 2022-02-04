@@ -1,13 +1,21 @@
-import {useRef, useState} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 import {RNCamera} from 'react-native-camera';
+// import storage from '@react-native-firebase/storage';
 // import {RNCamera} from 'react-native-camera';
 
 import _isEqual from 'lodash/isEqual';
+import _isEmpty from 'lodash/isEmpty';
 
 import {TCameraOptions} from '@domain/list-users/create/take-photo/types/camera-options';
+import ProfileContext from '@contexts/profile';
+import {BackHandler} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 export function useTakePhoto() {
   const cameraRef = useRef<RNCamera | null>();
+  const navigation = useNavigation();
+
+  const {setProfileUri} = useContext(ProfileContext);
 
   const [cameraOptions, setCameraOptions] = useState<TCameraOptions>({
     type: 'front',
@@ -19,6 +27,11 @@ export function useTakePhoto() {
       buttonNegative: 'Cancelar',
     },
   });
+
+  const icons = {
+    flash: _isEqual(cameraOptions.flashMode, 'off') ? 'flash-off' : 'flash-on',
+    switch: 'flip-camera-android',
+  };
 
   const [imageUri, setImageUri] = useState<string>('');
 
@@ -43,10 +56,39 @@ export function useTakePhoto() {
     }
   }
 
+  function onConfirmImage() {
+    setProfileUri(imageUri);
+    navigation.goBack();
+  }
+
+  useEffect(() => {
+    const backAction = () => {
+      if (_isEmpty(imageUri)) {
+        return false;
+      }
+
+      setImageUri('');
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, [imageUri]);
+
   return {
     cameraRef,
     cameraOptions,
     imageUri,
-    functions: {onPressSwitchCamera, onPressSwitchFlashMode, takePhoto},
+    icons,
+    functions: {
+      onPressSwitchCamera,
+      onPressSwitchFlashMode,
+      takePhoto,
+      onConfirmImage,
+    },
   };
 }
