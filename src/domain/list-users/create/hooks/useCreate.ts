@@ -25,7 +25,7 @@ export function useCreate(user: User) {
   const [payload, setPayload] = useState<Omit<User, 'id' | 'imageUri'>>({
     code: isUpdating ? user.code : '',
     name: isUpdating ? user.name : '',
-    birthdate: isUpdating ? user.birthdate : '',
+    birthdate: isUpdating ? user.birthdate : undefined,
   });
 
   function onPressProfile() {
@@ -61,8 +61,14 @@ export function useCreate(user: User) {
 
   function actionDatePicker(action: 'open' | 'close') {
     const actionFn = {
-      open: () => refRBSheet?.current?.open(),
-      close: () => refRBSheet?.current?.close(),
+      open: () => {
+        setDate(payload.birthdate ?? new Date());
+        refRBSheet?.current?.open();
+      },
+      close: () => {
+        setPayload(prev => ({...prev, birthdate: date}));
+        refRBSheet?.current?.close();
+      },
 
       default: () => refRBSheet?.current?.close(),
     };

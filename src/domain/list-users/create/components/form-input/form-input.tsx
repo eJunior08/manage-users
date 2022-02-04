@@ -9,9 +9,10 @@ type Props = {
     text: string,
     field: keyof Partial<Omit<User, 'id' | 'imageUri'>>,
   ) => void;
+  onOpenDatePicker: () => void;
 };
 
-export function FormInput({payload, onChangeText}: Props) {
+export function FormInput({payload, onChangeText, onOpenDatePicker}: Props) {
   return (
     <S.Wrapper>
       <S.Input
@@ -24,11 +25,9 @@ export function FormInput({payload, onChangeText}: Props) {
         value={payload.name}
         onChangeText={text => onChangeText(text, 'name')}
       />
-      <S.Input
-        placeholder="Insira a data de nascimento"
-        value={payload.birthdate}
-        onChangeText={text => onChangeText(text, 'birthdate')}
-      />
+      <S.DateInput onPress={onOpenDatePicker}>
+        <S.FakePlaceholder>Insira a data de aniversário</S.FakePlaceholder>
+      </S.DateInput>
     </S.Wrapper>
   );
 }
