@@ -1,4 +1,5 @@
-import {useContext, useRef, useState} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
+import {BackHandler} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import database from '@react-native-firebase/database';
@@ -75,6 +76,20 @@ export function useCreate(user: User) {
 
     (actionFn[action] || actionFn.default)();
   }
+
+  useEffect(() => {
+    const backAction = () => {
+      setProfileUri('');
+      return false;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, [setProfileUri]);
 
   return {
     refRBSheet,
