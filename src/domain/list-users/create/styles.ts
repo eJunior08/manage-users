@@ -86,7 +86,8 @@ export const Input = styled.TextInput.attrs({
 export const ButtonContainer = styled.View``;
 
 export const Button = styled.Pressable`
-  background-color: ${({theme}) => theme.color.primary};
+  background-color: ${({theme, disabled}) =>
+    disabled ? theme.color.gray4 : theme.color.primary};
 
   width: 200px;
   height: 50px;

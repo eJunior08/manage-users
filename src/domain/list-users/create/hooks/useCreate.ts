@@ -29,6 +29,20 @@ export function useCreate(user: User) {
     birthdate: isUpdating ? user.birthdate : undefined,
   });
 
+  const disableCreate = getDisableCreate(payload);
+
+  function getDisableCreate(object: Omit<User, 'id' | 'imageUri'>) {
+    if (isUpdating) {
+      return false;
+    }
+
+    const {code, name, birthdate} = object;
+
+    return (
+      _isEmpty(code) || _isEmpty(name) || !birthdate || _isEmpty(profileUri)
+    );
+  }
+
   function onPressProfile() {
     const routeName = 'TakePhoto' as never;
     navigation.navigate(routeName);
@@ -85,6 +99,9 @@ export function useCreate(user: User) {
 
       const reference = storage().ref(user.id);
       await reference.delete();
+
+      setProfileUri('');
+      navigation.goBack();
     } catch (error) {
       const message = 'Erro ao tentar excluir usuário.';
       console.error(message, error);
@@ -123,6 +140,7 @@ export function useCreate(user: User) {
   }, [setProfileUri]);
 
   return {
+    disableCreate,
     refRBSheet,
     imageUri,
     payload,

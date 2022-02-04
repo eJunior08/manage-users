@@ -21,7 +21,15 @@ type Prop = {
 
 export function Create({route}: Prop) {
   const create = useCreate(route?.params?.user);
-  const {imageUri, isUpdating, refRBSheet, date, payload, functions} = create;
+  const {
+    imageUri,
+    isUpdating,
+    refRBSheet,
+    date,
+    payload,
+    disableCreate,
+    functions,
+  } = create;
 
   return (
     <S.Wrapper>
@@ -42,7 +50,7 @@ export function Create({route}: Prop) {
       />
 
       <S.ButtonContainer>
-        <S.Button onPress={functions.onSave}>
+        <S.Button disabled={disableCreate} onPress={functions.onSave}>
           <S.ButtonText>{isUpdating ? 'Editar' : 'Criar'}</S.ButtonText>
         </S.Button>
 
