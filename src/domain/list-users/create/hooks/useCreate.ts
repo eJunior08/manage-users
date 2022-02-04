@@ -38,21 +38,40 @@ export function useCreate(user: User) {
     setPayload(prev => ({...prev, [field]: text}));
   }
 
-  async function onSave() {
-    try {
-      const newReference = database().ref('/users').push();
-      await newReference.set({
-        ...payload,
-        id: newReference.key,
-        createdAt: new Date().getTime(),
-      });
+  async function updateUser() {
+    await database()
+      .ref(`/users/${user.id}`)
+      .set({...user, ...payload});
 
-      const reference = storage().ref(newReference.key as string);
+    if (!_isEmpty(profileUri)) {
+      const reference = storage().ref(user.id);
       const pathToFile = profileUri;
       await reference.putFile(pathToFile as string);
+    }
+  }
+
+  async function createUser() {
+    const newReference = database().ref('/users').push();
+    await newReference.set({
+      ...payload,
+      id: newReference.key,
+      createdAt: new Date().getTime(),
+    });
+
+    const reference = storage().ref(newReference.key as string);
+    const pathToFile = profileUri;
+    await reference.putFile(pathToFile as string);
+  }
+
+  async function onSave() {
+    try {
+      if (isUpdating) {
+        await updateUser();
+      } else {
+        await createUser();
+      }
 
       setProfileUri('');
-
       navigation.goBack();
     } catch (error) {
       const message = 'Erro ao tentar salvar';
