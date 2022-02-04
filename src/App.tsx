@@ -8,13 +8,11 @@ import {Routes} from './router';
 import {ProfileProvider} from '@contexts/profile';
 
 const App = () => {
-  // const isDarkMode = useColorScheme() === 'dark';
-
   return (
     <ThemeProvider theme={theme}>
       <StatusBar
         translucent
-        backgroundColor={theme.color.light}
+        backgroundColor={theme.color.backgroundColor}
         barStyle="dark-content"
       />
 
@@ -30,8 +28,7 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
-    // paddingTop: StatusBar.currentHeight ?? 0,
+    backgroundColor: theme.color.backgroundColor,
   },
 });
 
