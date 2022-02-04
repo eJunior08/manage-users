@@ -5,6 +5,7 @@ import {ThemeProvider} from 'styled-components';
 import * as theme from '@theme/index';
 
 import {Routes} from './router';
+import {ProfileProvider} from '@contexts/profile';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -18,7 +19,9 @@ const App = () => {
       />
 
       <View style={styles.container}>
-        <Routes />
+        <ProfileProvider>
+          <Routes />
+        </ProfileProvider>
       </View>
     </ThemeProvider>
   );
