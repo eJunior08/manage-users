@@ -1,5 +1,12 @@
 import formatDateFNS from 'date-fns/format';
 
 export function formatDate(date: Date, format = 'dd/MM/yyyy') {
-  return formatDateFNS(date, format);
+  try {
+    console.log({date});
+    return formatDateFNS(date, format);
+  } catch (error) {
+    const message = 'Erro ao tentar formatar data.';
+    console.error(message, error);
+    return '';
+  }
 }
