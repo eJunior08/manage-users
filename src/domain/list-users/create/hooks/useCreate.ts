@@ -79,6 +79,18 @@ export function useCreate(user: User) {
     }
   }
 
+  async function onRemove() {
+    try {
+      await database().ref(`/users/${user.id}`).remove();
+
+      const reference = storage().ref(user.id);
+      await reference.delete();
+    } catch (error) {
+      const message = 'Erro ao tentar excluir usuário.';
+      console.error(message, error);
+    }
+  }
+
   function actionDatePicker(action: 'open' | 'close') {
     const actionFn = {
       open: () => {
@@ -115,12 +127,14 @@ export function useCreate(user: User) {
     imageUri,
     payload,
     date,
+    isUpdating,
     functions: {
       setDate,
       onPressProfile,
       onChangeText,
       onSave,
       actionDatePicker,
+      onRemove,
     },
   };
 }

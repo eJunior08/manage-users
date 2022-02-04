@@ -21,7 +21,7 @@ type Prop = {
 
 export function Create({route}: Prop) {
   const create = useCreate(route?.params?.user);
-  const {imageUri, refRBSheet, date, payload, functions} = create;
+  const {imageUri, isUpdating, refRBSheet, date, payload, functions} = create;
 
   return (
     <S.Wrapper>
@@ -41,7 +41,17 @@ export function Create({route}: Prop) {
         onOpenDatePicker={() => functions.actionDatePicker('open')}
       />
 
-      <S.Button onPress={functions.onSave} />
+      <S.ButtonContainer>
+        <S.Button onPress={functions.onSave}>
+          <S.ButtonText>{isUpdating ? 'Editar' : 'Criar'}</S.ButtonText>
+        </S.Button>
+
+        {isUpdating && (
+          <S.DeleteButton onPress={functions.onRemove}>
+            <S.ButtonText>Excluir</S.ButtonText>
+          </S.DeleteButton>
+        )}
+      </S.ButtonContainer>
 
       <DatePicker
         refRBSheet={refRBSheet}

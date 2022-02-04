@@ -83,9 +83,30 @@ export const Input = styled.TextInput.attrs({
   color: red;
 `;
 
+export const ButtonContainer = styled.View``;
+
 export const Button = styled.Pressable`
-  width: 100px;
+  background-color: ${({theme}) => theme.color.primary};
+
+  width: 200px;
   height: 50px;
 
-  background-color: ${({theme}) => theme.color.primary};
+  align-self: center;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  margin-bottom: 10px;
+`;
+
+export const DeleteButton = styled(Button)`
+  ]background-color: ${({theme}) => theme.color.error};
+`;
+
+export const ButtonText = styled.Text`
+  color: ${({theme}) => theme.color.gray1};
+  font-family: 'Poppins-Light';
+  font-size: 16px;
 `;
