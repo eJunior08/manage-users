@@ -15,7 +15,10 @@
     "baseUrl": "./",
     "typeRoots": ["node_modules/@types", "./src/types"],
     "paths": {
+      "@assets/*": ["./src/assets/*"],
+      "@contexts/*": ["src/contexts/*"],
       "@shared/*": ["./src/shared/*"],
+      "@reducer/*": ["./src/reducer/*"],
       "@router/*": ["./src/router/*"],
       "@domain/*": ["./src/domain/*"],
       "@models/*": ["./src/models/*"],
