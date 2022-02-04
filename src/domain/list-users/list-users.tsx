@@ -56,12 +56,12 @@ export function ListUsers() {
           );
 
           Promise.all(promises).then(values => {
-            console.log({data});
             const loadItems = data.map((d, index) => ({
               ...d,
               birthdate: new Date(d.birthdate as string),
               imageUri: values[index],
             }));
+
             setItems(loadItems.reverse());
             setLoading(false);
           });

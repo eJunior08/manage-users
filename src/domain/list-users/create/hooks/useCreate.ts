@@ -69,11 +69,14 @@ export function useCreate(user: User) {
     setLoading(true);
 
     const newReference = database().ref('/users').push();
-    await newReference.set({
+
+    const newUser = {
       ...payload,
       id: newReference.key,
       createdAt: new Date().getTime(),
-    });
+    };
+
+    await newReference.set(newUser);
 
     const reference = storage().ref(newReference.key as string);
     const pathToFile = profileUri;
