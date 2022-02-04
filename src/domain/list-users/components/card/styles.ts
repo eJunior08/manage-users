@@ -24,9 +24,6 @@ export const Wrapper = styled.Pressable.attrs({
 `;
 
 export const ProfileImage = styled.Image.attrs({
-  source: {
-    uri: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-  },
   resizeMode: 'cover',
 })`
   width: 90px;

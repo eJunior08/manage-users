@@ -11,7 +11,7 @@ type Props = {
 export function Card({user, ...props}: Props) {
   return (
     <S.Wrapper {...props}>
-      <S.ProfileImage />
+      <S.ProfileImage source={{uri: user.imageUri}} />
 
       <S.Content>
         <S.Title>Nome: {user.name}</S.Title>
