@@ -15,8 +15,17 @@ export const ProfileContainer = styled.Pressable`
   border-radius: 100px;
 
   background-color: blue;
+
+  align-self: center;
 `;
 
 export const Input = styled.TextInput`
   border-bottom-width: 1px;
+`;
+
+export const Button = styled.Pressable`
+  width: 100px;
+  height: 50px;
+
+  background-color: ${({theme}) => theme.color.primary};
 `;
