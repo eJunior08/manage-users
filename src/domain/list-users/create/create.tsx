@@ -9,16 +9,11 @@ import _isEmpty from 'lodash/isEmpty';
 /* Hooks */
 import {useCreate} from '@domain/list-users/create/hooks/useCreate';
 
-/* Models */
-import {User} from '@models/user';
+/* Types */
+import {ParamList} from '@domain/list-users/create/types/param-list';
 
 import * as S from './styles';
-
-type ParamList = {
-  Detail: {
-    user: User;
-  };
-};
+import {FormInput} from './components/form-input';
 
 type Prop = {
   route: RouteProp<ParamList, 'Detail'>;
@@ -33,28 +28,14 @@ export function Create({route}: Prop) {
       <S.ProfileContainer onPress={functions.onPressProfile}>
         {!_isEmpty(imageUri) && <S.Image source={{uri: imageUri}} />}
 
+        {_isEmpty(imageUri) && <S.UserIcon />}
+
         <S.CameraContainer>
-          <S.CameraIcon name="photo-camera" size={27.5} color="#fff" />
+          <S.CameraIcon />
         </S.CameraContainer>
       </S.ProfileContainer>
 
-      <S.InputContainer>
-        <S.Input
-          placeholder="Insira o código"
-          value={payload.code}
-          onChangeText={text => functions.onChangeText(text, 'code')}
-        />
-        <S.Input
-          placeholder="Insira o nome"
-          value={payload.name}
-          onChangeText={text => functions.onChangeText(text, 'name')}
-        />
-        <S.Input
-          placeholder="Insira a data de nascimento"
-          value={payload.birthdate}
-          onChangeText={text => functions.onChangeText(text, 'birthdate')}
-        />
-      </S.InputContainer>
+      <FormInput payload={payload} onChangeText={functions.onChangeText} />
 
       <S.Button onPress={functions.onSave} />
 

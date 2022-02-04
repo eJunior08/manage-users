@@ -24,6 +24,9 @@ export const ProfileContainer = styled.Pressable`
 
   align-self: center;
 
+  align-items: center;
+  justify-content: center;
+
   position: relative;
 
   margin-bottom: 50px;
@@ -55,7 +58,17 @@ export const CameraContainer = styled.View`
   justify-content: center;
 `;
 
-export const CameraIcon = styled(Icon)``;
+export const UserIcon = styled(Icon).attrs({
+  name: 'person',
+  size: 100,
+  color: '#fff',
+})``;
+
+export const CameraIcon = styled(Icon).attrs({
+  name: 'photo-camera',
+  size: 27.5,
+  color: '#fff',
+})``;
 
 export const InputContainer = styled.View`
   /* flex: 1; */
