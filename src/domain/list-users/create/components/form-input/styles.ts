@@ -29,3 +29,8 @@ export const FakePlaceholder = styled(Text)`
   color: ${({theme}) => theme.color.placeholderColor};
   font-family: 'Poppins-Regular';
 `;
+
+export const DateText = styled(Text)`
+  color: ${({theme}) => theme.color.gray8};
+  font-family: 'Poppins-Regular';
+`;

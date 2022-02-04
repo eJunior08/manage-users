@@ -1,5 +1,10 @@
-import {User} from '@models/user';
 import React from 'react';
+
+/* Models */
+import {User} from '@models/user';
+
+/* Utils */
+import {formatDate} from '@shared/util/date';
 
 import * as S from './styles';
 
@@ -26,7 +31,13 @@ export function FormInput({payload, onChangeText, onOpenDatePicker}: Props) {
         onChangeText={text => onChangeText(text, 'name')}
       />
       <S.DateInput onPress={onOpenDatePicker}>
-        <S.FakePlaceholder>Insira a data de aniversário</S.FakePlaceholder>
+        {!payload.birthdate && (
+          <S.FakePlaceholder>Insira a data de aniversário</S.FakePlaceholder>
+        )}
+
+        {payload.birthdate && (
+          <S.DateText>{formatDate(payload.birthdate)}</S.DateText>
+        )}
       </S.DateInput>
     </S.Wrapper>
   );
