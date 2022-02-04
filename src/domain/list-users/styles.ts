@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {Card} from '@domain/list-users/components/card';
 
@@ -6,7 +7,9 @@ import {metric} from '@theme/metrics';
 
 export const Wrapper = styled.View`
   flex: 1;
-  padding: ${metric.statusBarHeight}px 16px;
+  margin-top: ${metric.statusBarHeight}px;
+
+  background-color: ${({theme}) => theme.color.backgroundColor};
 
   position: relative;
 `;
@@ -28,12 +31,17 @@ export const FabButton = styled.Pressable.attrs({
 })`
   width: 80px;
   height: 80px;
-  border-radius: 10px;
+  border-radius: 30px;
 
-  background-color: blue;
+  background-color: ${({theme}) => theme.color.primary};
 
   position: absolute;
 
   bottom: 50px;
   align-self: center;
+
+  align-items: center;
+  justify-content: center;
 `;
+
+export const Teste = styled(Icon)``;
