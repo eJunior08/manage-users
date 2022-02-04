@@ -111,3 +111,7 @@ export const ButtonText = styled.Text`
   font-family: 'Poppins-Light';
   font-size: 16px;
 `;
+
+export const Indicator = styled.ActivityIndicator.attrs({
+  color: color.gray1,
+})``;

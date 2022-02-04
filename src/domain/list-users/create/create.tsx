@@ -28,8 +28,15 @@ export function Create({route}: Prop) {
     date,
     payload,
     disableCreate,
+    loading,
     functions,
   } = create;
+
+  function onHandleSave() {
+    if (!loading) {
+      functions.onSave();
+    }
+  }
 
   return (
     <S.Wrapper>
@@ -50,8 +57,12 @@ export function Create({route}: Prop) {
       />
 
       <S.ButtonContainer>
-        <S.Button disabled={disableCreate} onPress={functions.onSave}>
-          <S.ButtonText>{isUpdating ? 'Editar' : 'Criar'}</S.ButtonText>
+        <S.Button disabled={disableCreate} onPress={onHandleSave}>
+          {!loading && (
+            <S.ButtonText>{isUpdating ? 'Editar' : 'Criar'}</S.ButtonText>
+          )}
+
+          {loading && <S.Indicator />}
         </S.Button>
 
         {isUpdating && (

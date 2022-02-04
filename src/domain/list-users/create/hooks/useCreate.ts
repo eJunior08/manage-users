@@ -21,6 +21,7 @@ export function useCreate(user: User) {
 
   const isUpdating = !_isUndefined(user);
 
+  const [loading, setLoading] = useState(false);
   const [date, setDate] = useState(new Date());
   const imageUri = _isEmpty(profileUri) ? user?.imageUri ?? '' : profileUri;
   const [payload, setPayload] = useState<Omit<User, 'id' | 'imageUri'>>({
@@ -65,6 +66,8 @@ export function useCreate(user: User) {
   }
 
   async function createUser() {
+    setLoading(true);
+
     const newReference = database().ref('/users').push();
     await newReference.set({
       ...payload,
@@ -75,6 +78,8 @@ export function useCreate(user: User) {
     const reference = storage().ref(newReference.key as string);
     const pathToFile = profileUri;
     await reference.putFile(pathToFile as string);
+
+    setLoading(false);
   }
 
   async function onSave() {
@@ -140,6 +145,7 @@ export function useCreate(user: User) {
   }, [setProfileUri]);
 
   return {
+    loading,
     disableCreate,
     refRBSheet,
     imageUri,
