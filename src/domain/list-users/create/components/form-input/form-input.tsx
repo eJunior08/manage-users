@@ -36,7 +36,7 @@ export function FormInput({payload, onChangeText, onOpenDatePicker}: Props) {
         )}
 
         {payload.birthdate && (
-          <S.DateText>{formatDate(payload.birthdate)}</S.DateText>
+          <S.DateText>{formatDate(payload.birthdate as Date)}</S.DateText>
         )}
       </S.DateInput>
     </S.Wrapper>

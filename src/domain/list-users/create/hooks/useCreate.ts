@@ -63,7 +63,7 @@ export function useCreate(user: User) {
   function actionDatePicker(action: 'open' | 'close') {
     const actionFn = {
       open: () => {
-        setDate(payload.birthdate ?? new Date());
+        setDate((payload.birthdate as Date) ?? new Date());
         refRBSheet?.current?.open();
       },
       close: () => {

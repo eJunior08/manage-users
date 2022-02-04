@@ -1,6 +1,9 @@
 import React from 'react';
 import {User} from '@models/user';
 
+/* Utils */
+import {formatDate} from '@shared/util/date';
+
 import * as S from './styles';
 
 type Props = {
@@ -16,7 +19,9 @@ export function Card({user, ...props}: Props) {
       <S.Content>
         <S.Title>Nome: {user.name}</S.Title>
         <S.Title>Codigo: #{user.code}</S.Title>
-        <S.Title>Aniversário: {user.birthdate}</S.Title>
+        <S.Title>
+          Aniversário: {formatDate(new Date(user.birthdate as string))}
+        </S.Title>
       </S.Content>
     </S.Wrapper>
   );
