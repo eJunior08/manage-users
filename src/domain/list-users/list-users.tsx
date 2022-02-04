@@ -8,6 +8,7 @@ import storage from '@react-native-firebase/storage';
 /* Components */
 import {EmptyList} from '@domain/list-users/components/empty-list';
 import {HeaderList} from '@domain/list-users/components/header-list';
+import {Loading} from '@domain/list-users/components/loading';
 
 /* Model */
 import {User} from '@models/user';
@@ -17,6 +18,8 @@ import * as S from './styles';
 export function ListUsers() {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
+
+  const [loading, setLoading] = useState(true);
 
   const [items, setItems] = useState<User[]>([]);
 
@@ -53,12 +56,14 @@ export function ListUsers() {
           );
 
           Promise.all(promises).then(values => {
+            console.log({data});
             const loadItems = data.map((d, index) => ({
               ...d,
               birthdate: new Date(d.birthdate as string),
               imageUri: values[index],
             }));
             setItems(loadItems.reverse());
+            setLoading(false);
           });
         });
 
@@ -68,17 +73,23 @@ export function ListUsers() {
 
   return (
     <S.Wrapper>
-      <FlatList
-        data={items}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={renderItem}
-        ListEmptyComponent={<EmptyList />}
-        ListHeaderComponent={<HeaderList />}
-      />
+      {!loading && (
+        <FlatList
+          data={items}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={renderItem}
+          ListEmptyComponent={<EmptyList />}
+          ListHeaderComponent={<HeaderList />}
+        />
+      )}
 
-      <S.FabButton onPress={onPressFAB}>
-        <S.AddIcon />
-      </S.FabButton>
+      {loading && <Loading />}
+
+      {!loading && (
+        <S.FabButton onPress={onPressFAB}>
+          <S.AddIcon />
+        </S.FabButton>
+      )}
     </S.Wrapper>
   );
 }
