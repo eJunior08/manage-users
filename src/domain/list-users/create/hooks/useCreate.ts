@@ -57,15 +57,21 @@ export function useCreate(user: User) {
   }
 
   async function updateUser() {
+    setLoading(prev => ({...prev, saving: true}));
+
+    const birth = payload.birthdate?.toString();
+
     await database()
       .ref(`/users/${user.id}`)
-      .set({...user, ...payload});
+      .set({...user, ...payload, birthdate: birth});
 
     if (!_isEmpty(profileUri)) {
       const reference = storage().ref(user.id);
       const pathToFile = profileUri;
       await reference.putFile(pathToFile as string);
     }
+
+    setLoading(prev => ({...prev, saving: false}));
   }
 
   async function createUser() {
@@ -75,6 +81,7 @@ export function useCreate(user: User) {
 
     const newUser = {
       ...payload,
+      birthdate: payload.birthdate?.toString(),
       id: newReference.key,
       createdAt: new Date().getTime(),
     };
