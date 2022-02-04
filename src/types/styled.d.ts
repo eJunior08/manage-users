@@ -6,6 +6,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     color: {
       primary: string;
+      error: string;
       light: string;
 
       placeholderColor: string;

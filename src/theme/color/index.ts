@@ -1,5 +1,6 @@
 export const color = {
   primary: '#1D3557',
+  error: '#e63946',
   light: '#FFFFFF',
 
   placeholderColor: '#CCC',
